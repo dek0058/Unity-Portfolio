@@ -26,3 +26,29 @@ private static void combination ( int cnt, params int[] array );
 
 public static int[] get ( int dices, int result );
 ```
+
+* Dice Animator
+![Unity_6ycBq1I5Kn](https://user-images.githubusercontent.com/47653276/84734374-a63dfb80-afdb-11ea-8e1c-26c6074adaae.png)
+```c#
+public bool next_anim = true;
+private Queue<int> anim_queue = new Queue<int> ( );
+
+/// <summary>애니메이션을 큐에 대기 시킵니다.</summary>
+/// <param name="id">애니메이션 ID</param>
+public void add_animation ( int id ) {
+   if ( !animator ) {
+       return;
+   }
+   anim_queue.Enqueue ( id );
+}
+
+private void Update ( ) {
+    if (anim_queue.Count > 0) {
+        if(next_anim) {
+            next_anim = false;
+            animator.SetInteger ( "OrderID", anim_queue.Dequeue() );
+            animator.SetTrigger ( "Action" );
+        }
+    }
+}
+```

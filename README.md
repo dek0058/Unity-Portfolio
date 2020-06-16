@@ -28,7 +28,10 @@ public static int[] get ( int dices, int result );
 ```
 
 * Dice Animator
+
 ![Unity_6ycBq1I5Kn](https://user-images.githubusercontent.com/47653276/84734374-a63dfb80-afdb-11ea-8e1c-26c6074adaae.png)
+
+* DiceComponent.cs
 ```c#
 public bool next_anim = true;
 private Queue<int> anim_queue = new Queue<int> ( );
@@ -50,5 +53,13 @@ private void Update ( ) {
             animator.SetTrigger ( "Action" );
         }
     }
+}
+
+```
+
+and
+```c#
+if(_state_info.normalizedTime >= exit_time) {
+        mono_behaviour.next_anim = true;
 }
 ```

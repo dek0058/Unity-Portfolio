@@ -63,3 +63,33 @@ if(_state_info.normalizedTime >= exit_time) {
         mono_behaviour.next_anim = true;
 }
 ```
+
+# **BarycentricCoordinate Collision2D**
+
+![유니티충돌처리스크린샷](https://user-images.githubusercontent.com/47653276/84907499-3a988300-b0ee-11ea-8583-70877fb13b86.gif)
+
+BCInitializer.cs
+```c#
+[SerializeField] private Transform[] bc_transform;
+[SerializeField] private Transform target;
+private Vector2 convert_vector2(Vector3 position) {
+    return new Vector2(position.x, position.z);
+}
+private void Update() {
+    Vector2 min = new Vector2(Mathf.Min(Mathf.Min(bc_transform[0].position.x, bc_transform[1].position.x), bc_transform[2].position.x), Mathf.Min(Mathf.Min(bc_transform[0].position.z, bc_transform[1].position.z), bc_transform[2].position.z));
+    Vector2 max = new Vector2(Mathf.Max(Mathf.Max(bc_transform[0].position.x, bc_transform[1].position.x), bc_transform[2].position.x), Mathf.Max(Mathf.Max(bc_transform[0].position.z, bc_transform[1].position.z), bc_transform[2].position.z));
+    Vector2 u = convert_vector2(bc_transform[1].position) - convert_vector2(bc_transform[0].position);
+    Vector2 v = convert_vector2(bc_transform[2].position) - convert_vector2(bc_transform[0].position);
+    float c = Vector2.Dot(u, u) * Vector2.Dot(v, v) - Vector2.Dot(u, v) * Vector2.Dot(u, v);
+    if (c == 0) {
+        return;
+    }
+    Vector2 w = convert_vector2(target.position) - convert_vector2(bc_transform[0].position);
+    float s = (Vector2.Dot(w, u) * Vector2.Dot(v, v) - Vector3.Dot(w, v) * Vector3.Dot(v, u)) / c;
+    float t = (Vector2.Dot(w, v) * Vector2.Dot(u, u) - Vector3.Dot(w, u) * Vector3.Dot(u, v)) / c;
+    float one_minus_st = 1 f - s - t;
+    if (((s >= 0 f) && (s <= 1 f)) && ((t >= 0 f) && (t <= 1 f)) && ((one_minus_st >= 0 f) && (one_minus_st <= 1 f))) {
+        Debug.DrawLine(target.position, Vector3.up * 100 f, Color.green);
+    }
+}
+```

@@ -35,7 +35,7 @@ public class ViewingAngle : MonoBehaviour
                 if(dot > delta) { // 시야 포착
                     float dist = Vector2.Dot ( target_dir, target_dir ); // 거리 비교용
                     LayerMask layer = 1 << LayerMask.NameToLayer ( "Character" ) | 1 << LayerMask.NameToLayer ( "Obstacle" ); // 충돌 판별용 레이어
-                    RaycastHit2D hit = Physics2D.Raycast ( character[CharacterMovement.AttachPoint.Head].position, target_dir, dist * dist, layer );
+                    RaycastHit2D hit = Physics2D.Raycast ( character[CharacterMovement.AttachPoint.Head].position, target_dir, dist, layer );
                     if( hit ) {
                         Color color = Color.red;
                         if ( !hit.transform.Equals ( t.transform ) ) {

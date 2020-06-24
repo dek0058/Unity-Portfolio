@@ -93,3 +93,35 @@ private void Update() {
     }
 }
 ```
+
+# **Viewing Angle**
+
+![ezgif-4-74e38288491f](https://user-images.githubusercontent.com/47653276/85544483-05dc7c80-b656-11ea-862d-1d0939d511fb.gif)
+
+
+![POWERPNT_ApdxEiHJ0j](https://user-images.githubusercontent.com/47653276/85546292-b5feb500-b657-11ea-93e9-8159aedd6f02.png)
+
+![POWERPNT_cmjl3Ol44Y](https://user-images.githubusercontent.com/47653276/85546314-bb5bff80-b657-11ea-9b04-6b72c5efe0ae.png)
+
+
+ViewingAngle.cs
+```c#
+foreach ( var t in targets ) {
+                Vector2 forward = character.forward;
+                Vector2 target_dir = t[CharacterMovement.AttachPoint.Chest].position - character[CharacterMovement.AttachPoint.Head].position;
+                float dot = Vector2.Dot ( forward, target_dir.normalized );
+                if(dot > delta) { // 시야 포착
+                    float dist = Vector2.Dot ( target_dir, target_dir ); // 거리 비교용
+                    LayerMask layer = 1 << LayerMask.NameToLayer ( "Character" ) | 1 << LayerMask.NameToLayer ( "Obstacle" ); // 충돌 판별용 레이어
+                    RaycastHit2D hit = Physics2D.Raycast ( character[CharacterMovement.AttachPoint.Head].position, target_dir, dist * dist, layer );
+                    if( hit ) {
+                        Color color = Color.red;
+                        if ( !hit.transform.Equals ( t.transform ) ) {
+                            color = Color.blue;
+                        }
+                        Debug.DrawLine ( character[CharacterMovement.AttachPoint.Head].position, hit.point, color );
+                    }
+                }
+            }
+```
+

@@ -96,7 +96,7 @@ private void Update() {
 
 # **Viewing Angle**
 
-*사용된 에셋
+*사용된 에셋*
 <br>Tilemap2D
 <br>Tilemap2D-Extra
 <br>2DPixelPerfect

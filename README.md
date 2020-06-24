@@ -97,11 +97,9 @@ private void Update() {
 # **Viewing Angle**
 
 *사용된 에셋
-Tilemap2D
-
-Tilemap2D-Extra
-
-2DPixelPerfect
+<br>Tilemap2D
+<br>Tilemap2D-Extra
+<br>2DPixelPerfect
 
 ![ezgif-4-74e38288491f](https://user-images.githubusercontent.com/47653276/85544483-05dc7c80-b656-11ea-862d-1d0939d511fb.gif)
 

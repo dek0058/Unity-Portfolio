@@ -96,6 +96,11 @@ private void Update() {
 
 # **Viewing Angle**
 
+*사용된 에셋*
+<br>Tilemap2D
+<br>Tilemap2D-Extra
+<br>2DPixelPerfect
+
 ![ezgif-4-74e38288491f](https://user-images.githubusercontent.com/47653276/85544483-05dc7c80-b656-11ea-862d-1d0939d511fb.gif)
 
 
@@ -113,7 +118,7 @@ foreach ( var t in targets ) {
                 if(dot > delta) { // 시야 포착
                     float dist = Vector2.Dot ( target_dir, target_dir ); // 거리 비교용
                     LayerMask layer = 1 << LayerMask.NameToLayer ( "Character" ) | 1 << LayerMask.NameToLayer ( "Obstacle" ); // 충돌 판별용 레이어
-                    RaycastHit2D hit = Physics2D.Raycast ( character[CharacterMovement.AttachPoint.Head].position, target_dir, dist * dist, layer );
+                    RaycastHit2D hit = Physics2D.Raycast ( character[CharacterMovement.AttachPoint.Head].position, target_dir, dist, layer );
                     if( hit ) {
                         Color color = Color.red;
                         if ( !hit.transform.Equals ( t.transform ) ) {

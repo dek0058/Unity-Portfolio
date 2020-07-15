@@ -32,7 +32,7 @@ public class ViewingAngle : MonoBehaviour
                 Vector2 forward = character.forward;
                 Vector2 target_dir = t[CharacterMovement.AttachPoint.Chest].position - character[CharacterMovement.AttachPoint.Head].position;
                 float dot = Vector2.Dot ( forward, target_dir.normalized );
-                if(dot > delta) { // 시야 포착
+                if (dot > delta) { // 시야 포착
                     float dist = Vector2.Dot ( target_dir, target_dir ); // 거리 비교용
                     LayerMask layer = 1 << LayerMask.NameToLayer ( "Character" ) | 1 << LayerMask.NameToLayer ( "Obstacle" ); // 충돌 판별용 레이어
                     RaycastHit2D hit = Physics2D.Raycast ( character[CharacterMovement.AttachPoint.Head].position, target_dir, dist, layer );
